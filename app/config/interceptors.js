@@ -2,10 +2,16 @@
  * List of http interceptors
  */
 
-import AuthInterceptor from '../modules/authentication/services/interceptor';
+/**
+ * !!!!!!!!!!!!!!!!!
+ * Need to decide, require interceptor or pass name of factory.
+ * !!!!!!!!!!!!!!!!!
+ */
+
+import NotAuthorizedInterceptor from '../modules/authentication/services/not_authorized_interceptor';
 
 export default function interceptors($httpProvider) {
-  $httpProvider.interceptors.push(AuthInterceptor);
+  $httpProvider.interceptors.push('NotAuthorizedInterceptor');
 };
 
 interceptors.$inject = ['$httpProvider'];
