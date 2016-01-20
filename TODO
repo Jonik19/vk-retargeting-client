@@ -1,6 +1,1 @@
 TODO: list
-
-# 1. Create user factory
-# 2. Create authentication service with methods: authenticate. It has to authenticate user,
- fill user service by data. Store token into LocalStorage or SessionStorage.
-# 3. Create class Controller and extend from it each controller
