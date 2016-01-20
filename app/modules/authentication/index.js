@@ -5,6 +5,7 @@ import angular from 'angular';
  */
 
 import SignInController from './controllers/sign_in_controller';
+import SignUpController from './controllers/sign_up_controller';
 
 /**
  * Interceptors
@@ -26,6 +27,7 @@ import SessionService from './services/session_service';
 
 export default angular.module('app.authentication', [])
   .controller('SignInController', SignInController)
+  .controller('SignUpController', SignUpController)
 
   .factory('NotAuthorizedInterceptor', NotAuthorizedInterceptor)
   .factory('TokenInterceptor', TokenInterceptor)

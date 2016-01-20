@@ -1,5 +1,15 @@
-<div class="container">
-    <h1>Authentication</h1>
-    <hr>
+<div class="header clearfix">
+    <nav>
+        <ul class="nav nav-pills pull-right">
+            <li role="presentation" ui-sref-active="active"><a ui-sref="home">Home</a></li>
+            <li role="presentation" ui-sref-active="active"><a ui-sref="auth.sign-in">Sign In</a></li>
+            <li role="presentation" ui-sref-active="active"><a ui-sref="auth.sign-up">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <h3 class="text-muted">Purchases</h3>
+</div>
+
+<div class="jumbotron">
     <ui-view></ui-view>
 </div>

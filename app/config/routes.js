@@ -33,6 +33,13 @@ export default function config($urlRouterProvider, $stateProvider) {
       controller: 'SignInController',
       controllerAs: 'signIn'
     })
+
+    .state('auth.sign-up', {
+      url: '/sign-up',
+      template: require('../modules/authentication/views/sign-up.html'),
+      controller: 'SignUpController',
+      controllerAs: 'signUp'
+    })
 }
 
 config.$inject = ['$urlRouterProvider', '$stateProvider'];
