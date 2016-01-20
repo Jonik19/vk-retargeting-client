@@ -1,52 +1,12 @@
-export default class Controller {
-  /**
-   * Constructor
-   *
-   * @param {Array|Object} injectionsArgs 'arguments' object of constructor
-   */
+import Injector from '../services/injector';
 
-  constructor(injectionsArgs) {
-    this.injections = this.injectDependencies(injectionsArgs, this.constructor.$inject);
-  }
+/**
+ * Common controller for extending.
+ */
 
-  /**
-   * Creates 'injections' object on current instance(this)
-   * and writes dependencies specified in '$inject' field into 'injections' field
-   * with appropriate names.
-   * Example:
-   *
-   * class ChildController extends Controller {
-   *   constructor() {
-   *     super(arguments);
-   *   }
-   *
-   *   myMethod() {
-   *     // Dependencies are available in 'injections' field
-   *     this.injections.$q;
-   *     this.injections.MyService.doSomething();
-   *   }
-   * }
-   *
-   * ChildController.$inject = ['$q', 'MyService'];
-   *
-   * @param {Array|Object} args Array or child's 'arguments' object
-   * @param {Array} injectionNames Array of dependencies to inject
-   */
-
-  injectDependencies(args, injectionNames) {
-    let dependencies = Array.prototype.slice.call(args);
-
-    if( Object.prototype.toString.call( injectionNames ) !== '[object Array]' ) {
-      throw new Error('Specify "$inject" field of controller');
-    }
-
-    let injections = {};
-
-    for(let i = 0, l = injectionNames.length; i < l; i++) {
-      injections[injectionNames[i]] = dependencies[i];
-    }
-
-    return injections;
+export default class Controller extends Injector {
+  constructor(args) {
+    super(args);
   }
 }
 
