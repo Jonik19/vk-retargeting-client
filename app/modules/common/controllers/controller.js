@@ -1,13 +1,15 @@
 export default class Controller {
-  constructor() {
+  constructor(injectionsArgs) {
     let vm = this;
 
-    let injections = Array.prototype.slice.call(arguments);
+    vm.injections = {};
+
+    let injections = Array.prototype.slice.call(injectionsArgs);
     let injectionNames = vm.constructor.$inject;
 
     if(Array.isArray(injectionNames)) {
-      vm.injections = injectionNames.map(function (injection, index) {
-        return { [injection]: injections[index] };
+      injectionNames.forEach(function (injection, index) {
+        vm.injections[injection] = injections[index] ;
       });
     }
   }

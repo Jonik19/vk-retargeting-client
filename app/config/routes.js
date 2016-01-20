@@ -12,7 +12,6 @@ export default function config($urlRouterProvider, $stateProvider) {
    * Home routes
    */
 
-
     .state('home', {
       url: '/',
       template: require('../modules/home/views/index.html'),
