@@ -9,8 +9,12 @@ export default function interceptor($q) {
     response: function (response) {
       return response;
     },
-    responseError: function (error) {
-      return $q.reject(error);
+    responseError: function (response) {
+      if(response.status && response.status === 401) {
+      //  Do sign out
+      }
+
+      return $q.reject(response);
     }
   };
 };
