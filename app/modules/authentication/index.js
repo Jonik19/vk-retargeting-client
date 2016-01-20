@@ -11,12 +11,14 @@ import SignInController from './controllers/sign_in_controller';
  */
 
 import NotAuthorizedInterceptor from './services/not_authorized_interceptor';
+import TokenInterceptor from './services/token_interceptor';
 
 /**
  * Services
  */
 
 import AuthenticationService from './services/authentication_service';
+import SessionService from './services/session_service';
 
 /**
  * Definition
@@ -26,6 +28,8 @@ export default angular.module('app.authentication', [])
   .controller('SignInController', SignInController)
 
   .factory('NotAuthorizedInterceptor', NotAuthorizedInterceptor)
+  .factory('TokenInterceptor', TokenInterceptor)
 
   .service('AuthenticationService', AuthenticationService)
+  .service('SessionService', SessionService)
   .name;
