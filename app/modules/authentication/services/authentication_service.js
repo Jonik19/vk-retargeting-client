@@ -1,29 +1,49 @@
-import Controller from '../../common/controllers/controller';
+import Service from '../../common/services/service';
+import SessionService from './session_service';
 
-export default class AuthenticationService extends Controller {
+/**
+ * AuthenticationService is service which do remote signIn, signUp and signOut(not yet).
+ * After successful remote request AuthenticationService delegates work SessionService.
+ */
+
+export default class AuthenticationService extends Service {
   constructor() {
     super(arguments);
-
-    this.user = null;
   }
+
+  /**
+   * Authenticates user by passed data remotely and locally.
+   *
+   * @param {Object} data Data consists of user and password fields
+   * @returns {*|Promise.<T>}
+   */
 
   authenticate(data) {
+    let self = this;
+
     data = data || {};
 
-    return this.injections.$http.post('http://localhost:3000/sign-in', data)
-      .then(this.createUser.bind(this));
+    return this.injections.Api.post('/sign-in', data)
+      .then(function (response) {
+        return self.injections.SessionService.createSession(response);
+      });
   }
 
-  createUser(response) {
-    this.user = response.data.response.user;
-    this.token = response.data.response.token;
+  /**
+   * Checks current state of user authentication.
+   * If user is authenticated sets local user and returns promise with resolved user.
+   *
+   * @returns {*|Promise.<T>}
+   */
 
-    return this.getUser();
-  }
+  check() {
+    let self = this;
 
-  getUser() {
-    return JSON.parse(JSON.stringify(this.user));
+    return this.injections.Api.get('/check')
+      .then(function (response) {
+        return self.injections.SessionService.setUser(response.user);
+      });
   }
 };
 
-AuthenticationService.$inject = ['$http'];
+AuthenticationService.$inject = ['$http', 'Api', 'SessionService'];
