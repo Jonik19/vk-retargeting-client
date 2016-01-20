@@ -1,17 +1,15 @@
-export default function interceptor($q) {
+/**
+ * Interceptor to catch 'un authorized' 401 error.
+ * If gets 401 http response status destroys local user session and redirects to sign-in page.
+ */
+
+export default function NotAuthorizedInterceptor($q, SessionService, $injector) {
   return {
-    request: function (config) {
-      return config;
-    },
-    requestError: function (error) {
-      return error;
-    },
-    response: function (response) {
-      return response;
-    },
     responseError: function (response) {
       if(response.status && response.status === 401) {
-      //  Do sign out
+        SessionService.destroySession();
+
+        $injector.get('$state').go('auth.sign-in');
       }
 
       return $q.reject(response);
@@ -19,4 +17,4 @@ export default function interceptor($q) {
   };
 };
 
-interceptor.$inject = ['$q'];
+NotAuthorizedInterceptor.$inject = ['$q', 'SessionService', '$injector'];
