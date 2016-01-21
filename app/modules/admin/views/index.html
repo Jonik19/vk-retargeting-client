@@ -1,0 +1,14 @@
+<div class="header clearfix">
+    <nav>
+        <ul class="nav nav-pills pull-right">
+            <li role="presentation" ui-sref-active="active"><a ui-sref="admin.rooms">Rooms</a></li>
+            <li role="presentation" ><a ng-click="admin.signOut()"><span ng-bind="admin.user.name"></span> | Sign Out</a></li>
+        </ul>
+    </nav>
+
+    <h3 class="text-muted">Purchases - Admin</h3>
+</div>
+
+<div class="jumbotron">
+    <ui-view></ui-view>
+</div>
