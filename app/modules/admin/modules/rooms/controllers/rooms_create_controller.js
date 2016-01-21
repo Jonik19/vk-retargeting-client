@@ -7,6 +7,8 @@ import Controller from '../../../../common/controllers/controller';
 export default class RoomsIndexController extends Controller {
   constructor() {
     super(arguments);
+
+    this.room = {};
   }
 
   create(room) {
