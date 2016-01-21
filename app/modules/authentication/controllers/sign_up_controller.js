@@ -33,7 +33,7 @@ export default class SignUpController extends Controller {
   redirectOnSuccess(user) {
     alert('Congratulations. You are our new user!');
 
-    this.injections.$state.go('home');
+    this.injections.$state.go('admin.rooms');
   }
 
   /**
@@ -47,4 +47,4 @@ export default class SignUpController extends Controller {
   }
 }
 
-SignUpController.$inject = ['$http', 'AuthenticationService', '$state'];
+SignUpController.$inject = ['AuthenticationService', '$state'];
