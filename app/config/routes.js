@@ -40,6 +40,28 @@ export default function config($urlRouterProvider, $stateProvider) {
       controller: 'SignUpController',
       controllerAs: 'signUp'
     })
+
+  /**
+   * Admin
+   */
+
+    .state('admin', {
+      abstract: true,
+      template: require('../modules/admin/views/index.html'),
+      controller: 'AdminController',
+      controllerAs: 'admin'
+    })
+
+    /**
+     * Admin: Rooms
+     */
+
+    .state('admin.rooms', {
+      url: '/rooms',
+      template: require('../modules/admin/modules/rooms/views/index.html'),
+      controller: 'IndexController',
+      controllerAs: 'vm'
+    })
 }
 
 config.$inject = ['$urlRouterProvider', '$stateProvider'];
