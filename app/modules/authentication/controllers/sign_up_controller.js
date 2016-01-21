@@ -1,10 +1,10 @@
 import Controller from '../../common/controllers/controller';
 
 /**
- * SignInController controller.
+ * SignUpController controller.
  */
 
-export default class SignInController extends Controller {
+export default class SignUpController extends Controller {
   constructor() {
     super(arguments);
 
@@ -12,37 +12,39 @@ export default class SignInController extends Controller {
   }
 
   /**
-   * Authenticates user if successful redirects to admin page
+   * Creates and authenticates user if successful redirects to admin page
    * otherwise show errors.
    *
    * @param {Object} user Object with fields username and password
    */
 
-  signIn(user) {
-    this.injections.AuthenticationService.authenticate(user)
+  signUp(user) {
+    this.injections.AuthenticationService.create(user)
       .then(this.redirectOnSuccess.bind(this))
       .catch(this.showErrors.bind(this));
   }
 
   /**
-   * Method which is called on successful authentication
+   * Method which is called on successful user creation
    *
    * @param user
    */
 
   redirectOnSuccess(user) {
+    alert('Congratulations. You are our new user!');
+
     this.injections.$state.go('admin.rooms');
   }
 
   /**
-   * Method which is called on unsuccessful authentication
+   * Method which is called on unsuccessful user creation
    *
    * @param error
    */
 
   showErrors(error) {
-    alert(JSON.stringify(error));
+    console.log(error.errors);
   }
 }
 
-SignInController.$inject = ['AuthenticationService', '$state'];
+SignUpController.$inject = ['AuthenticationService', '$state'];

@@ -55,6 +55,6 @@ config.plugins = [
   new ExtractTextPlugin('bundle.css')
 ];
 
-config.watch = 'development' === NODE_ENV;
+// config.watch = 'development' === NODE_ENV;
 
 module.exports = config;
