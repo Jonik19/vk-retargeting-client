@@ -25,23 +25,25 @@ export default class SignUpController extends Controller {
   }
 
   /**
-   * Method which is called on successful authentication
+   * Method which is called on successful user creation
    *
    * @param user
    */
 
   redirectOnSuccess(user) {
+    alert('Congratulations. You are our new user!');
+
     this.injections.$state.go('home');
   }
 
   /**
-   * Method which is called on unsuccessful authentication
+   * Method which is called on unsuccessful user creation
    *
    * @param error
    */
 
   showErrors(error) {
-    alert(JSON.stringify(error));
+    console.log(error.errors);
   }
 }
 
