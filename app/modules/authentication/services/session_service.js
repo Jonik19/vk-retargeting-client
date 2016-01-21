@@ -13,17 +13,14 @@ export default class SessionService extends Service {
   }
 
   /**
-   * Fills local user and token, also writes token to localStorage.
+   * Fills local user and token, also writes token and user to localStorage.
    *
    * @param {Object} response Object consists of user and token fields
    * @returns {*}
    */
 
   createSession(response) {
-    this.setUserToStorage(response.token);
     this.setUser(response.user);
-
-    this.setTokenToStorage(response.token);
     this.setToken(response.token);
 
     return this.getUser();
