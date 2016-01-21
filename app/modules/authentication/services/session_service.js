@@ -20,31 +20,13 @@ export default class SessionService extends Service {
    */
 
   createSession(response) {
+    this.setUserToStorage(response.token);
     this.setUser(response.user);
+
     this.setTokenToStorage(response.token);
     this.setToken(response.token);
 
     return this.getUser();
-  }
-
-  /**
-   * Sets local user
-   *
-   * @param {Object} user
-   * @returns {*}
-   */
-
-  setUser(user) {
-    return this.user = user;
-  }
-
-  /**
-   * Returns new user object. It DOESN'T return same object so you can change it
-   * and your changes will not affect to original user object.
-   */
-
-  getUser() {
-    return JSON.parse(JSON.stringify(this.user));
   }
 
   /**
@@ -68,6 +50,19 @@ export default class SessionService extends Service {
    */
 
   setToken(token) {
+    this.setTokenToStorage(token);
+    this.setLocalToken(token);
+
+    return this.getToken();
+  }
+
+  /**
+   * Sets token to local variables.
+   * @param {String} token
+   * @returns {*}
+   */
+
+  setLocalToken(token) {
     return this.token = token;
   }
 
@@ -89,12 +84,67 @@ export default class SessionService extends Service {
   }
 
   /**
+   * Returns user. If local token doesn't exist writes it from localStorage
+   * to local variable and then returns.
+   * @returns {null|*}
+   */
+
+  getUser() {
+    if(this.user === null) {
+      this.setLocalUser(this.getUserFromStorage());
+    }
+
+    // We can change this new object
+
+    return JSON.parse(JSON.stringify(this.user));
+  }
+
+  /**
+   * Sets user.
+   * @param {String} user
+   * @returns {*}
+   */
+
+  setUser(user) {
+    this.setLocalUser(user);
+    this.setUserToStorage(user);
+
+    return this.getUser();
+  }
+
+  /**
+   * Sets user to local variables.
+   * @param {String} user
+   * @returns {*}
+   */
+
+  setLocalUser(user) {
+    return this.user = user;
+  }
+
+  /**
+   * Sets user to localStorage.
+   * @param {String} user
+   */
+
+  setUserToStorage(user) {
+    return localStorage.setItem(this.userName, JSON.stringify(user));
+  }
+
+  /**
+   * Returns user from localStorage.
+   */
+
+  getUserFromStorage() {
+    return JSON.parse(localStorage.getItem(this.userName));
+  }
+
+  /**
    * Destroys local user, local token and token from localStorage.
    */
 
   destroySession() {
     this.setUser(null);
-    this.setTokenToStorage(null);
     this.setToken(null);
   }
 
@@ -106,6 +156,15 @@ export default class SessionService extends Service {
   get tokenName() {
     return 'token';
   }
+
+  /**
+   * Name of item in localStorage to store user.
+   * @returns {string}
+   */
+
+  get userName() {
+    return 'user';
+  }
 };
 
-SessionService.$inject = [];
+SessionService.$inject = ['$q'];
