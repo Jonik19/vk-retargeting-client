@@ -63,6 +63,20 @@ export default class AuthenticationService extends Service {
         return self.injections.SessionService.createSession(response);
       });
   }
+
+  /**
+   * Signs out user remotely(not yet) and locally.
+   *
+   * @returns {*|Promise.<T>}
+   */
+
+  signOut() {
+    let self = this;
+
+    return self.injections.$q(function (resolve, reject) {
+      resolve(self.injections.SessionService.destroySession());
+    });
+  }
 };
 
-AuthenticationService.$inject = ['$http', 'Api', 'SessionService'];
+AuthenticationService.$inject = ['$q', 'Api', 'SessionService'];
