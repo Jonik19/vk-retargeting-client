@@ -12,8 +12,18 @@ export default class RoomsIndexController extends Controller {
   }
 
   create(room) {
-    alert('Hello ');
+    this.injections.RoomsRoomResource.save(room).$promise
+      .then(this.redirectAfterCreation.bind(this))
+      .catch(this.showErrors.bind(this));
+  }
+
+  redirectAfterCreation() {
+    this.injections.$state.go('admin.rooms.list');
+  }
+
+  showErrors(response) {
+    console.log(response.data.error.errors);
   }
 }
 
-RoomsIndexController.$inject = [];
+RoomsIndexController.$inject = ['RoomsRoomResource', '$state'];

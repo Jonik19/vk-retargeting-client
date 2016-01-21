@@ -12,8 +12,8 @@ export default class RoomsListController extends Controller {
       .then(this.fillListOfRooms.bind(this));
   }
 
-  fillListOfRooms(response) {
-    this.rooms = response.data;
+  fillListOfRooms(data) {
+    this.rooms = data.response.items;
   }
 
 }
