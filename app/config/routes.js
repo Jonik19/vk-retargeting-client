@@ -75,6 +75,13 @@ export default function config($urlRouterProvider, $stateProvider) {
       controller: 'RoomsCreateController',
       controllerAs: 'vm'
     })
+
+    .state('admin.rooms.enter', {
+      url: '/enter',
+      template: require('../modules/admin/modules/rooms/views/enter.html'),
+      controller: 'RoomsEnterController',
+      controllerAs: 'vm'
+    })
 }
 
 config.$inject = ['$urlRouterProvider', '$stateProvider'];
