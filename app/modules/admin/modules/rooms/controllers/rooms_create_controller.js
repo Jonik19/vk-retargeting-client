@@ -22,7 +22,9 @@ export default class RoomsIndexController extends Controller {
   }
 
   showErrors(response) {
-    console.log(response.data.error.errors);
+    alert(JSON.stringify(response.data.error));
+    console.log(response.data.error);
+
   }
 }
 

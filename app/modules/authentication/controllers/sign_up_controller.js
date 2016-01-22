@@ -43,7 +43,8 @@ export default class SignUpController extends Controller {
    */
 
   showErrors(error) {
-    console.log(error.errors);
+    alert(JSON.stringify(error));
+    console.log(error);
   }
 }
 

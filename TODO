@@ -6,3 +6,4 @@ TODO: list
 # 3. Change local every 'check' and 'sign-in'
 # 4. Add states names to config
 # 5. Problem with abstract 'admin.rooms' state
+# 6. Use Resource instead API
