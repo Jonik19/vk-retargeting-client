@@ -58,8 +58,21 @@ export default function config($urlRouterProvider, $stateProvider) {
 
     .state('admin.rooms', {
       url: '/rooms',
-      template: require('../modules/admin/modules/rooms/views/index.html'),
-      controller: 'IndexController',
+      abstract: true,
+      template: require('../modules/admin/modules/rooms/views/index.html')
+    })
+
+    .state('admin.rooms.list', {
+      url: '',
+      template: require('../modules/admin/modules/rooms/views/list.html'),
+      controller: 'RoomsListController',
+      controllerAs: 'vm'
+    })
+
+    .state('admin.rooms.create', {
+      url: '/create',
+      template: require('../modules/admin/modules/rooms/views/create.html'),
+      controller: 'RoomsCreateController',
       controllerAs: 'vm'
     })
 }

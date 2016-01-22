@@ -31,7 +31,7 @@ export default class SignInController extends Controller {
    */
 
   redirectOnSuccess(user) {
-    this.injections.$state.go('admin.rooms');
+    this.injections.$state.go('admin.rooms.list');
   }
 
   /**

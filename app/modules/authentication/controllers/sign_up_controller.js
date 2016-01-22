@@ -33,7 +33,7 @@ export default class SignUpController extends Controller {
   redirectOnSuccess(user) {
     alert('Congratulations. You are our new user!');
 
-    this.injections.$state.go('admin.rooms');
+    this.injections.$state.go('admin.rooms.list');
   }
 
   /**
@@ -43,7 +43,8 @@ export default class SignUpController extends Controller {
    */
 
   showErrors(error) {
-    console.log(error.errors);
+    alert(JSON.stringify(error));
+    console.log(error);
   }
 }
 
