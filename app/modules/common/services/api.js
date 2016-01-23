@@ -98,7 +98,7 @@ export default class Api extends Service {
     options = options || {};
 
     options.method = options.method || 'GET';
-    options.url = this.injections.config.baseUrl + options.url;
+    options.url = this.injections.config.api.baseUrl + options.url;
     options.data = options.data || {};
 
     return this.injections.$http(options)
