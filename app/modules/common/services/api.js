@@ -98,7 +98,7 @@ export default class Api extends Service {
     options = options || {};
 
     options.method = options.method || 'GET';
-    options.url = this.baseUrl + options.url;
+    options.url = this.injections.config.baseUrl + options.url;
     options.data = options.data || {};
 
     return this.injections.$http(options)
@@ -109,16 +109,6 @@ export default class Api extends Service {
        throw response.data.error || {};
       });
   }
-
-  /**
-   * Base url of api.
-   *
-   * @returns {string}
-   */
-
-  get baseUrl() {
-    return 'http://localhost:3000';
-  }
 };
 
-Api.$inject = ['$http'];
+Api.$inject = ['$http', 'config'];
