@@ -1,7 +1,7 @@
 import Controller from '../../../../common/controllers/controller';
 
 /**
- * SignInController controller.
+ * RoomsIndexController controller.
  */
 
 export default class RoomsIndexController extends Controller {
