@@ -31,7 +31,7 @@ export default class AuthenticationService extends Service {
 
   /**
    * Checks current state of user authentication.
-   * If user is authenticated sets local user and returns promise with resolved user.
+   * If user is authenticated sets local user and new token.
    * We don't pass token in this method, that job is performed by interceptor.
    *
    * @returns {*|Promise.<T>}
@@ -42,11 +42,11 @@ export default class AuthenticationService extends Service {
 
     return this.injections.Api.get('/check')
       .then(function (response) {
-        return self.injections.SessionService.setUser(response.user);
+        return self.injections.SessionService.createSession(response);
       });
   }
 
-  /**
+  /**returns promise with resolved user
    * Creates new user and authenticates his by passed data remotely and locally.
    *
    * @param {Object} data Data consists of name, username and password fields

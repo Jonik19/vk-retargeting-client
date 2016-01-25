@@ -1,5 +1,5 @@
 /**
- * RoomResource is service to do local user authentication.
+ * RoomResource.
  */
 
 export default function RoomsRoomResource($resource, config) {

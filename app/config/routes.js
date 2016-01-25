@@ -16,7 +16,7 @@ export default function config($urlRouterProvider, $stateProvider) {
       url: '/',
       template: require('../modules/home/views/index.html'),
       controller: 'HomeController',
-      controllerAs: 'home'
+      controllerAs: 'vm'
     })
 
   /**
@@ -31,14 +31,14 @@ export default function config($urlRouterProvider, $stateProvider) {
       url: '/sign-in',
       template: require('../modules/authentication/views/sign-in.html'),
       controller: 'SignInController',
-      controllerAs: 'signIn'
+      controllerAs: 'vm'
     })
 
     .state('auth.sign-up', {
       url: '/sign-up',
       template: require('../modules/authentication/views/sign-up.html'),
       controller: 'SignUpController',
-      controllerAs: 'signUp'
+      controllerAs: 'vm'
     })
 
   /**
@@ -49,7 +49,7 @@ export default function config($urlRouterProvider, $stateProvider) {
       abstract: true,
       template: require('../modules/admin/views/index.html'),
       controller: 'AdminController',
-      controllerAs: 'admin'
+      controllerAs: 'vm'
     })
 
     /**
