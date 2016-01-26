@@ -56,5 +56,6 @@ config.plugins = [
 ];
 
 // config.watch = 'development' === NODE_ENV;
+// config.cache = false;
 
 module.exports = config;

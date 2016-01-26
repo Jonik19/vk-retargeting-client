@@ -31,12 +31,13 @@ import home from './modules/home';
 import authentication from './modules/authentication';
 import common from './modules/common';
 import admin from './modules/admin';
+import errors from './modules/errors';
 
 /**
  * Definition
  */
 
-angular.module('app', [resource, uiRouter, home, authentication, common, admin])
+angular.module('app', [resource, uiRouter, home, authentication, common, admin, errors])
   .constant('config', config)
 
   .config(interceptors)
