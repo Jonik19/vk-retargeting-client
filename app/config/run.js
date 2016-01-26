@@ -2,7 +2,9 @@
  * Run
  */
 
-export default function run(AuthenticationService, $state) {
+export default function run(AuthenticationService, $state, $rootScope, config) {
+  $rootScope.config = config;
+
   AuthenticationService.check()
     .then(function (user) {
       // TODO: redirect to admin page
@@ -10,4 +12,4 @@ export default function run(AuthenticationService, $state) {
     });
 };
 
-run.$inject = ['AuthenticationService', '$state'];
+run.$inject = ['AuthenticationService', '$state', '$rootScope', 'config'];

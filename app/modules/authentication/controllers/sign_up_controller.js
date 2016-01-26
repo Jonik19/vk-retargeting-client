@@ -16,9 +16,17 @@ export default class SignUpController extends Controller {
    * otherwise show errors.
    *
    * @param {Object} user Object with fields username and password
+   * @param {Object} event Event object of current action
    */
 
-  signUp(user) {
+  signUp(user, event) {
+    if(this.form.$invalid) {
+
+      alert('Показать ошибки на каждом ');
+
+      return event.preventDefault();
+    }
+
     this.injections.AuthenticationService.create(user)
       .then(this.redirectOnSuccess.bind(this))
       .catch(this.showErrors.bind(this));

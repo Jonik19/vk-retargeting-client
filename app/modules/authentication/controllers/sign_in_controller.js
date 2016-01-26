@@ -16,9 +16,14 @@ export default class SignInController extends Controller {
    * otherwise show errors.
    *
    * @param {Object} user Object with fields username and password
+   * @param {Object} event Event object of current action
    */
 
-  signIn(user) {
+  signIn(user, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.AuthenticationService.authenticate(user)
       .then(this.redirectOnSuccess.bind(this))
       .catch(this.showErrors.bind(this));
