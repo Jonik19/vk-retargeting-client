@@ -82,6 +82,28 @@ export default function config($urlRouterProvider, $stateProvider) {
       controller: 'RoomsEnterController',
       controllerAs: 'vm'
     })
+    .state('admin.rooms.show', {
+      url: '/:id',
+      template: require('../modules/admin/modules/rooms/views/show.html'),
+      controller: 'RoomsShowController',
+      controllerAs: 'vm'
+    })
+
+  /**
+   * Purchases routes
+   */
+
+    .state('admin.rooms.purchases', {
+      url: '/:roomId/purchases',
+      abstract: true,
+      template: require('../modules/admin/modules/purchases/views/index.html')
+    })
+    .state('admin.rooms.purchases.create', {
+      url: '/create',
+      template: require('../modules/admin/modules/purchases/views/create.html'),
+      controller: 'PurchasesCreateController',
+      controllerAs: 'vm'
+    })
 }
 
 config.$inject = ['$urlRouterProvider', '$stateProvider'];
