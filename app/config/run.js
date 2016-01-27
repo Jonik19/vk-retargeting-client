@@ -4,6 +4,7 @@
 
 export default function run(AuthenticationService, $state, $rootScope, config) {
   $rootScope.config = config;
+  $rootScope.$state = $state;
 
   AuthenticationService.check()
     .then(function (user) {
