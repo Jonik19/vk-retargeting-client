@@ -1,0 +1,60 @@
+<div class="">
+
+    <!--Header-->
+    <div class="row">
+        <div class="col-md-3">
+            <p>Name: <span ng-bind="vm.room.name"></span></p>
+        </div>
+
+        <div class="col-md-3">
+            <b>ID: <span ng-bind="vm.room.id"></span></b>
+        </div>
+
+        <div class="col-md-3">
+            <p>Users count: <span ng-bind="vm.users.length"></span></p>
+        </div>
+
+        <div class="col-md-3">
+            <div class="btn-group btn-group-xs">
+                <a ng-href="{{ $state.href('admin.rooms.purchases.create', {roomId: vm.roomId}) }}" class="btn btn-default">Create purchase</a>
+                <button class="btn btn-default">Live room</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!--Table-->
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered" ng-if="vm.dataLoaded">
+                <thead>
+                    <tr>
+                        <th>Purchase</th>
+                        <th>Buyer</th>
+                        <th class="active" ng-repeat="user in vm.users track by user.id" ng-bind="user.name"></th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="purchase in vm.purchases track by purchase.id">
+
+                        <!--Purchase name and owner of purchase-->
+                        <td ng-bind="purchase.name"></td>
+                        <td ng-bind="vm.getUserById(purchase.owner_id).name"></td>
+
+                        <!--Users-->
+                        <td class="active" ng-repeat="user in vm.users track by user.id">
+                            <span ng-if="vm.isInPurchase(purchase, user.id)" ng-bind="purchase.amount_per_user"></span>
+                            <span ng-if="!vm.isInPurchase(purchase, user.id)">-</span>
+                        </td>
+
+                        <!--Amount-->
+                        <td ng-bind="purchase.amount"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
