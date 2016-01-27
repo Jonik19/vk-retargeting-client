@@ -7,6 +7,7 @@ import bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import resource from 'angular-resource';
+import lodash from 'lodash';
 
 /**
  * Config middlewares
