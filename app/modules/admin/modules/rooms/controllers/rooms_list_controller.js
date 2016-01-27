@@ -8,9 +8,25 @@ export default class RoomsListController extends Controller {
   constructor() {
     super(arguments);
 
-    this.injections.RoomsRoomResource.get().$promise
+    this.loadRooms()
       .then(this.fillListOfRooms.bind(this));
   }
+
+  /**
+   * Loads room list from api.
+   *
+   * @returns {*|Function}
+   */
+
+  loadRooms() {
+    return this.injections.RoomResource.get().$promise;
+  }
+
+  /**
+   * Assigns response from api to the scope.
+   *
+   * @param data
+   */
 
   fillListOfRooms(data) {
     this.rooms = data.response.items;
@@ -18,4 +34,4 @@ export default class RoomsListController extends Controller {
 
 }
 
-RoomsListController.$inject = ['RoomsRoomResource'];
+RoomsListController.$inject = ['RoomResource'];
