@@ -8,12 +8,15 @@ export default class SessionService extends Service {
   constructor() {
     super(arguments);
 
-    this.user = null;
-    this.token= null;
+    // User is not authenticated without a call to api
+    this.setLocalToken(null);
+    this.setLocalUser(null);
+    this.setAuthentication(false);
   }
 
   /**
-   * Fills local user and token, also writes token and user to localStorage.
+   * Fills local user and token, writes token and user to localStorage,
+   * also sets user authentication state to true.
    *
    * @param {Object} response Object consists of user and token fields
    * @returns {*}
@@ -22,6 +25,7 @@ export default class SessionService extends Service {
   createSession(response) {
     this.setUser(response.user);
     this.setToken(response.token);
+    this.setAuthentication(true);
 
     return this.getUser();
   }
@@ -137,12 +141,30 @@ export default class SessionService extends Service {
   }
 
   /**
-   * Destroys local user, local token and token from localStorage.
+   * Destroys local user, local token, token from localStorage, user from localStorage
+   * and sets user authentication state to false.
    */
 
   destroySession() {
     this.setUser(null);
     this.setToken(null);
+    this.setAuthentication(false);
+  }
+
+  /**
+   * Sets users authentication to boolean state.
+   */
+
+  setAuthentication(state) {
+    this.authenticated = !!state;
+  }
+
+  /**
+   * Returns users authentication state.
+   */
+
+  isAuthenticated() {
+    return this.authenticated;
   }
 
   /**
