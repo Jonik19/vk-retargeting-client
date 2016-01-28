@@ -3,27 +3,35 @@
     <!--User has rooms-->
 
     <div ng-if="vm.rooms.length > 0">
-        <h3>List of rooms</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>List of rooms</h3>
+            </div>
+        </div>
 
-        <table class="table">
-            <thead>
-            <th>№</th>
-            <th>Name</th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="room in vm.rooms track by room.id">
-                <td><span ng-bind="room.id"></span></td>
-                <td><a ng-href="{{ $state.href('admin.rooms.show', {id: room.id}) }}" ng-bind="room.name"></a></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <th>№</th>
+                    <th>Name</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="room in vm.rooms track by room.id">
+                        <td><span ng-bind="room.id"></span></td>
+                        <td><a ng-href="{{ $state.href('admin.rooms.show', {id: room.id}) }}" ng-bind="room.name"></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <!--User doesn't have any rooms-->
 
     <div ng-if="vm.rooms.length === 0">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <h3>You don't have any rooms now.</h3>
             </div>
         </div>
