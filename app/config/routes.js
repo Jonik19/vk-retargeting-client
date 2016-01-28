@@ -4,7 +4,7 @@
 
 
 export default function config($urlRouterProvider, $stateProvider) {
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/rooms');
 
   $stateProvider
 
