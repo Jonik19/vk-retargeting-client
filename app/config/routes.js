@@ -24,7 +24,10 @@ export default function config($urlRouterProvider, $stateProvider) {
    */
 
     .state('auth', {
-      template: require('../modules/authentication/views/index.html')
+      template: require('../modules/authentication/views/index.html'),
+      data: {
+        authenticate: false
+      }
     })
 
     .state('auth.sign-in', {
@@ -49,7 +52,10 @@ export default function config($urlRouterProvider, $stateProvider) {
       abstract: true,
       template: require('../modules/admin/views/index.html'),
       controller: 'AdminController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        authenticate: true
+      }
     })
 
     /**
