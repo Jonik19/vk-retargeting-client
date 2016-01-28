@@ -6,18 +6,19 @@
             <p>Name: <span ng-bind="vm.room.name"></span></p>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <b>ID: <span ng-bind="vm.room.id"></span></b>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <p>Users count: <span ng-bind="vm.users.length"></span></p>
         </div>
 
-        <div class="col-md-3">
-            <div class="btn-group btn-group-xs">
-                <a ng-href="{{ $state.href('admin.rooms.purchases.create', {roomId: vm.roomId}) }}" class="btn btn-default">Create purchase</a>
-                <button class="btn btn-default">Live room</button>
+        <div class="col-md-5 text-right">
+            <div class="btn-group btn-group-md">
+                <a ng-href="{{ $state.href('admin.rooms.purchases.create', {roomId: vm.roomId}) }}" class="btn btn-md btn-success">
+                    <i class="glyphicon glyphicon-plus"></i> Add purchase
+                </a>
             </div>
         </div>
     </div>
