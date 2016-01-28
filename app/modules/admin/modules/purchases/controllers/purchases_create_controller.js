@@ -35,7 +35,7 @@ export default class PurchasesCreateController extends Controller {
 
   create(purchase) {
     this.injections.PurchaseResource.save(purchase).$promise
-      .then(this.redirectAfterCreation.bind(this));
+      .then(this.backToRoom.bind(this));
   }
 
   /**
@@ -53,8 +53,16 @@ export default class PurchasesCreateController extends Controller {
    * Redirects user to the current room page.
    */
 
-  redirectAfterCreation() {
+  backToRoom() {
     this.injections.$state.go('admin.rooms.show', {id: this.roomId});
+  }
+
+  /**
+   * Returns url to the current room page.
+   */
+
+  getCurrentRoomUrl() {
+    return this.injections.$state.href('admin.rooms.show', {id: this.roomId});
   }
 
   /**
