@@ -24,7 +24,10 @@ export default function config($urlRouterProvider, $stateProvider) {
    */
 
     .state('auth', {
-      template: require('../modules/authentication/views/index.html')
+      template: require('../modules/authentication/views/index.html'),
+      data: {
+        authenticate: false
+      }
     })
 
     .state('auth.sign-in', {
@@ -49,7 +52,10 @@ export default function config($urlRouterProvider, $stateProvider) {
       abstract: true,
       template: require('../modules/admin/views/index.html'),
       controller: 'AdminController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      data: {
+        authenticate: true
+      }
     })
 
     /**
@@ -80,6 +86,28 @@ export default function config($urlRouterProvider, $stateProvider) {
       url: '/enter',
       template: require('../modules/admin/modules/rooms/views/enter.html'),
       controller: 'RoomsEnterController',
+      controllerAs: 'vm'
+    })
+    .state('admin.rooms.show', {
+      url: '/:id',
+      template: require('../modules/admin/modules/rooms/views/show.html'),
+      controller: 'RoomsShowController',
+      controllerAs: 'vm'
+    })
+
+  /**
+   * Purchases routes
+   */
+
+    .state('admin.rooms.purchases', {
+      url: '/:roomId/purchases',
+      abstract: true,
+      template: require('../modules/admin/modules/purchases/views/index.html')
+    })
+    .state('admin.rooms.purchases.create', {
+      url: '/create',
+      template: require('../modules/admin/modules/purchases/views/create.html'),
+      controller: 'PurchasesCreateController',
       controllerAs: 'vm'
     })
 }

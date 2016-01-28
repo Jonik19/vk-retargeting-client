@@ -8,7 +8,7 @@
     <tbody>
         <tr ng-repeat="room in vm.rooms track by room.id">
             <td><span ng-bind="room.id"></span></td>
-            <td><a href="" ng-bind="room.name"></a></td>
+            <td><a ng-href="{{ $state.href('admin.rooms.show', {id: room.id}) }}" ng-bind="room.name"></a></td>
         </tr>
     </tbody>
 </table>

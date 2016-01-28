@@ -11,11 +11,21 @@ export default class RoomsEnterController extends Controller {
     this.room = {};
   }
 
+  /**
+   * Enters in passed room and redirects on success.
+   *
+   * @param room
+   */
+
   enter(room) {
-    this.injections.RoomsRoomResource.enter(room).$promise
+    this.injections.RoomResource.enter(room).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));
   }
+
+  /**
+   * Redirects to user room list.
+   */
 
   redirectAfterCreation() {
     this.injections.$state.go('admin.rooms.list');
@@ -26,4 +36,4 @@ export default class RoomsEnterController extends Controller {
   }
 }
 
-RoomsEnterController.$inject = ['RoomsRoomResource', '$state'];
+RoomsEnterController.$inject = ['RoomResource', '$state'];

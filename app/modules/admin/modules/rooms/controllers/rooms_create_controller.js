@@ -1,25 +1,39 @@
 import Controller from '../../../../common/controllers/controller';
 
 /**
- * RoomsIndexController controller.
+ * RoomsCreateController controller.
  */
 
-export default class RoomsIndexController extends Controller {
+export default class RoomsCreateController extends Controller {
   constructor() {
     super(arguments);
 
     this.room = {};
   }
 
+  /**
+   * Creates room by passed data and redirects after success.
+   *
+   * @param room
+   */
+
   create(room) {
-    this.injections.RoomsRoomResource.save(room).$promise
+    this.injections.RoomResource.save(room).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));
   }
 
+  /**
+   * Redirects user to his room list.
+   */
+
   redirectAfterCreation() {
     this.injections.$state.go('admin.rooms.list');
   }
+
+  /**
+   * Deete it in future !!!!
+   */
 
   showErrors(response) {
     alert(JSON.stringify(response.data.error));
@@ -28,4 +42,4 @@ export default class RoomsIndexController extends Controller {
   }
 }
 
-RoomsIndexController.$inject = ['RoomsRoomResource', '$state'];
+RoomsCreateController.$inject = ['UserResource', 'RoomResource', '$state'];
