@@ -14,12 +14,14 @@ import SignUpController from './controllers/sign_up_controller';
 import NotAuthorizedInterceptor from './services/not_authorized_interceptor';
 import TokenInterceptor from './services/token_interceptor';
 
+
 /**
  * Services
  */
 
 import AuthenticationService from './services/authentication_service';
 import SessionService from './services/session_service';
+import StateChangeService from './services/state_change_service';
 
 /**
  * Definition
@@ -32,6 +34,7 @@ export default angular.module('app.authentication', [])
   .factory('NotAuthorizedInterceptor', NotAuthorizedInterceptor)
   .factory('TokenInterceptor', TokenInterceptor)
 
+  .service('StateChangeService', StateChangeService)
   .service('AuthenticationService', AuthenticationService)
   .service('SessionService', SessionService)
   .name;
