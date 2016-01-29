@@ -5,6 +5,8 @@ import Service from '../../common/services/service';
  */
 
 export default class StateChangeService extends Service {
+  static $inject = ['AuthenticationService', '$state', 'SessionService'];
+
   constructor() {
     super(arguments);
 
@@ -63,5 +65,3 @@ export default class StateChangeService extends Service {
   }
 
 };
-
-StateChangeService.$inject = ['AuthenticationService', '$state', 'SessionService'];

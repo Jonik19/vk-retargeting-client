@@ -5,6 +5,8 @@ import Controller from '../../common/controllers/controller';
  */
 
 export default class SignInController extends Controller {
+  static $inject = ['AuthenticationService', '$state'];
+
   constructor() {
     super(arguments);
 
@@ -49,5 +51,3 @@ export default class SignInController extends Controller {
     alert(JSON.stringify(error));
   }
 }
-
-SignInController.$inject = ['AuthenticationService', '$state'];

@@ -7,6 +7,8 @@ import SessionService from './session_service';
  */
 
 export default class AuthenticationService extends Service {
+  static $inject = ['$q', 'Api', 'SessionService'];
+
   constructor() {
     super(arguments);
   }
@@ -78,5 +80,3 @@ export default class AuthenticationService extends Service {
     });
   }
 };
-
-AuthenticationService.$inject = ['$q', 'Api', 'SessionService'];

@@ -5,6 +5,8 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class RoomsShowController extends Controller {
+  static $inject = ['RoomResource', 'UserResource', 'PurchaseResource', '$stateParams', '$q'];
+
   constructor() {
     super(arguments);
 
@@ -95,5 +97,3 @@ export default class RoomsShowController extends Controller {
     this.dataLoaded = true;
   }
 }
-
-RoomsShowController.$inject = ['RoomResource', 'UserResource', 'PurchaseResource', '$stateParams', '$q'];

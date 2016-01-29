@@ -5,6 +5,8 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class PurchasesCreateController extends Controller {
+  static $inject = ['UserResource', 'RoomResource', 'PurchaseResource', '$q', '$state', '$stateParams'];
+
   constructor() {
     super(arguments);
 
@@ -94,5 +96,3 @@ export default class PurchasesCreateController extends Controller {
     user.selected = !user.selected;
   }
 }
-
-PurchasesCreateController.$inject = ['UserResource', 'RoomResource', 'PurchaseResource', '$q', '$state', '$stateParams'];

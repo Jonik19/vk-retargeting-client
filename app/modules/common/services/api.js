@@ -6,6 +6,8 @@ import Service from '../../common/services/service';
  */
 
 export default class Api extends Service {
+  static $inject = ['$http', 'config'];
+
   constructor() {
     super(arguments);
   }
@@ -110,5 +112,3 @@ export default class Api extends Service {
       });
   }
 };
-
-Api.$inject = ['$http', 'config'];

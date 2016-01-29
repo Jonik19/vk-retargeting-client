@@ -5,9 +5,9 @@ import Injector from './injector';
  */
 
 export default class Service extends Injector {
+  static $inject = [];
+
   constructor(args) {
     super(args);
   }
 }
-
-Service.$inject = [];
