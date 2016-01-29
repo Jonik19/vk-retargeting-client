@@ -2,13 +2,24 @@
 
 <div class="container">
     <div class="col-md-8 col-md-push-2">
-        <form class="form">
+        <form class="form" name="vm.form">
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="ID of room" ng-model="vm.room.id">
+                <input name="id"
+                       class="form-control"
+                       type="number"
+                       placeholder="ID of room"
+                       ng-model="vm.room.id"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 400}}"
+                       required
+                >
+
+                <div ng-show="vm.form.id.$dirty" ng-messages="vm.form.id.$error">
+                    <div ng-message="required">Field should be filled</div>
+                </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-md btn-success btn-block" type="submit" ng-click="vm.enter(vm.room)">Enter</button>
+                <button class="btn btn-md btn-success btn-block" type="submit" ng-click="vm.enter(vm.room, $event)">Enter</button>
             </div>
         </form>
     </div>

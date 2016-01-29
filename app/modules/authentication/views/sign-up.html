@@ -10,9 +10,13 @@
                        type="text"
                        placeholder="Name"
                        ng-model="vm.user.name"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 400}}"
                        required
                 >
-                <error-message for="vm.form.name"></error-message>
+
+                <div ng-show="vm.form.name.$dirty" ng-messages="vm.form.name.$error">
+                    <div ng-message="required">Field should be filled</div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -21,10 +25,15 @@
                        type="text"
                        placeholder="Username"
                        ng-model="vm.user.username"
-                       pattern="{{config.validation.username.pattern}}"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 400}}"
+                       pattern="[a-zA-Z0-9]+"
                        required
                 >
-                <error-message for="vm.form.username"></error-message>
+
+                <div ng-show="vm.form.username.$dirty" ng-messages="vm.form.username.$error">
+                    <div ng-message="required">Field should be filled</div>
+                    <div ng-message="pattern">You can use only latin symbols and numbers</div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -33,10 +42,15 @@
                        type="password"
                        placeholder="Password"
                        ng-model="vm.user.password"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 400}}"
+                       minlength="6"
                        required
-                       minlength="{{config.validation.password.minlength}}"
                 >
-                <error-message for="vm.form.password"></error-message>
+
+                <div ng-show="vm.form.password.$dirty" ng-messages="vm.form.password.$error">
+                    <div ng-message="required">Field should be filled</div>
+                    <div ng-message="minlength">Value should be at least 6 characters length</div>
+                </div>
             </div>
 
             <div class="form-group">

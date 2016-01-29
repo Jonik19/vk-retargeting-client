@@ -17,9 +17,14 @@ export default class RoomsEnterController extends Controller {
    * Enters in passed room and redirects on success.
    *
    * @param room
+   * @param event
    */
 
-  enter(room) {
+  enter(room, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.RoomResource.enter(room).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));

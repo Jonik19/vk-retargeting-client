@@ -17,9 +17,14 @@ export default class RoomsCreateController extends Controller {
    * Creates room by passed data and redirects after success.
    *
    * @param room
+   * @param event
    */
 
-  create(room) {
+  create(room, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.RoomResource.save(room).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));

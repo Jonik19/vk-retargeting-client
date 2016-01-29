@@ -33,9 +33,14 @@ export default class PurchasesCreateController extends Controller {
    * otherwise shows errors.
    *
    * @param {Object} purchase Purchase object to send to api
+   * @param {Object} event
    */
 
-  create(purchase) {
+  create(purchase, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.PurchaseResource.save(purchase).$promise
       .then(this.backToRoom.bind(this));
   }
