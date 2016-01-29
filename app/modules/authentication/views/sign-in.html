@@ -10,6 +10,7 @@
                        type="text"
                        placeholder="Username"
                        ng-model="vm.user.username"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 300}}"
                        pattern="{{config.validation.username.pattern}}"
                        required
                 >
@@ -22,10 +23,15 @@
                        type="password"
                        placeholder="Password"
                        ng-model="vm.user.password"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 300}}"
                        minlength="{{ config.validation.password.minlength }}"
                        required
                 >
-                <error-message for="vm.form.password"></error-message>
+
+                <div ng-show="vm.form.password.$dirty" ng-messages="vm.form.password.$error">
+                    <div ng-message="required">Field should be filled</div>
+                    <div ng-message="minlength">Value should be at least 6 characters length</div>
+                </div>
             </div>
 
             <div class="form-group">

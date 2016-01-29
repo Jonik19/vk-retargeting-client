@@ -66,7 +66,7 @@ export default class RoomsShowController extends Controller {
 
   isInPurchase(purchase, userId) {
     // this function works to many times
-    return !!_.find(purchase.users, {user_id: userId});
+    return !!_.find(purchase.users, {userId: userId});
   }
 
   /**

@@ -4,7 +4,7 @@
 
 export default {
   api: {
-    baseUrl: 'http://10.10.54.19:8080'
+    baseUrl: 'http://10.10.52.24:8080'
   },
   validation: {
     password: {

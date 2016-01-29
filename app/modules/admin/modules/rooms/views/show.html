@@ -64,11 +64,11 @@
 
                             <!--Purchase name and owner of purchase-->
                             <td ng-bind="purchase.name"></td>
-                            <td ng-bind="vm.getUserById(purchase.owner_id).name"></td>
+                            <td ng-bind="vm.getUserById(purchase.ownerId).name"></td>
 
                             <!--Users-->
                             <td class="active" ng-repeat="user in vm.users track by user.id">
-                                <span ng-if="vm.isInPurchase(purchase, user.id)" ng-bind="purchase.amount_per_user"></span>
+                                <span ng-if="vm.isInPurchase(purchase, user.id)" ng-bind="purchase.amountPerUser"></span>
                                 <span ng-if="!vm.isInPurchase(purchase, user.id)">-</span>
                             </td>
 
