@@ -42,7 +42,8 @@ export default class PurchasesCreateController extends Controller {
     }
 
     this.injections.PurchaseResource.save(purchase).$promise
-      .then(this.backToRoom.bind(this));
+      .then(this.backToRoom.bind(this))
+      .catch(this.showErrors.bind(this));
   }
 
   /**
@@ -51,6 +52,7 @@ export default class PurchasesCreateController extends Controller {
    * @param roomId
    * @returns {*|Function}
    */
+
 
   loadUsers(roomId) {
     return this.injections.UserResource.getByRoom({roomId: roomId}).$promise;
@@ -99,5 +101,15 @@ export default class PurchasesCreateController extends Controller {
     }
 
     user.selected = !user.selected;
+  }
+
+  /**
+   * Method which is called on unsuccessful authentication
+   *
+   * @param response
+   */
+
+  showErrors(response) {
+    this.error = response.data.error.message;
   }
 }

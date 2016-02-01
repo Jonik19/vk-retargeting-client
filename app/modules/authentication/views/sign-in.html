@@ -2,7 +2,11 @@
 
 <div class="container">
     <div class="col-md-8 col-md-push-2">
-        <form class="form" name="vm.form" novalidate>
+        <form class="form" ng-submit="vm.signIn(vm.user, $event)" name="vm.form" novalidate>
+
+            <div class="form-group">
+                <form-error for="vm.error"></form-error>
+            </div>
 
             <div class="form-group">
                 <input name="username"
@@ -14,7 +18,7 @@
                        required
                 >
 
-                <div ng-show="vm.form.username.$dirty" ng-messages="vm.form.username.$error">
+                <div ng-show="vm.form.username.$dirty || vm.form.$submitted" ng-messages="vm.form.username.$error"  class="text-danger">
                     <div ng-message="required">Field should be filled</div>
                 </div>
             </div>
@@ -29,13 +33,13 @@
                        required
                 >
 
-                <div ng-show="vm.form.password.$dirty" ng-messages="vm.form.password.$error">
+                <div ng-show="vm.form.password.$dirty || vm.form.$submitted" ng-messages="vm.form.password.$error"  class="text-danger">
                     <div ng-message="required">Field should be filled</div>
                 </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-md btn-primary btn-block" type="submit" ng-click="vm.signIn(vm.user, $event)">Sign in</button>
+                <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
             </div>
 
         </form>

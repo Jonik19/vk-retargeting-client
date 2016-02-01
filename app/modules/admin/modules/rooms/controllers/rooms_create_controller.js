@@ -39,12 +39,12 @@ export default class RoomsCreateController extends Controller {
   }
 
   /**
-   * Deete it in future !!!!
+   * Method which is called on unsuccessful authentication
+   *
+   * @param response
    */
 
   showErrors(response) {
-    alert(JSON.stringify(response.data.error));
-    console.log(response.data.error);
-
+    this.error = response.data.error.message;
   }
 }

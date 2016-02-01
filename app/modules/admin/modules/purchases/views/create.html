@@ -7,7 +7,12 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form name="vm.form" novalidate>
+            <form name="vm.form" ng-submit="vm.create(vm.purchase, $event)" novalidate>
+
+                <div class="form-group">
+                    <form-error for="vm.error"></form-error>
+                </div>
+
                 <div class="form-group">
                     <input type="text"
                            name="name"
@@ -18,7 +23,7 @@
                            required
                     >
 
-                    <div ng-show="vm.form.name.$dirty" ng-messages="vm.form.name.$error">
+                    <div ng-show="vm.form.name.$dirty || vm.form.$submitted" ng-messages="vm.form.name.$error" class="text-danger">
                         <div ng-message="required">Field should be filled</div>
                     </div>
                 </div>
@@ -34,9 +39,10 @@
                            required
                     >
 
-                    <div ng-show="vm.form.amount.$dirty" ng-messages="vm.form.amount.$error">
+                    <div ng-show="vm.form.amount.$dirty || vm.form.$submitted" ng-messages="vm.form.amount.$error" class="text-danger">
                         <div ng-message="required">Field should be filled</div>
                         <div ng-message="min">Value should be higher 0</div>
+                        <div ng-message="number">Value should be a number</div>
                     </div>
                 </div>
 
@@ -69,7 +75,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <button class="btn btn-success btn-block" type="submit" ng-click="vm.create(vm.purchase, $event)">Create</button>
+                            <button class="btn btn-success btn-block" type="submit">Create</button>
                         </div>
                     </div>
                 </div>

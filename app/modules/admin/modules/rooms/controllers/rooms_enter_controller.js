@@ -38,7 +38,14 @@ export default class RoomsEnterController extends Controller {
     this.injections.$state.go('admin.rooms.list');
   }
 
+
+  /**
+   * Method which is called on unsuccessful authentication
+   *
+   * @param response
+   */
+
   showErrors(response) {
-    alert(JSON.stringify(response.data.error));
+    this.error = response.data.error.message;
   }
 }

@@ -5,12 +5,12 @@ import angular from 'angular';
  */
 
 import ngMessages from 'angular-messages';
-import ErrorMessageDirective from './directives/error-message';
+import FormErrorDirective from './directives/form-error';
 
 /**
  * Definition
  */
 
 export default angular.module('app.errors', [ngMessages])
-  .directive('errorMessage', ErrorMessageDirective)
+  .directive('formError', FormErrorDirective)
   .name;

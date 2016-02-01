@@ -22,6 +22,7 @@ export default class SignInController extends Controller {
    */
 
   signIn(user, event) {
+
     if(this.form.$invalid) {
       return event.preventDefault();
     }
@@ -48,6 +49,6 @@ export default class SignInController extends Controller {
    */
 
   showErrors(error) {
-    alert(JSON.stringify(error));
+    this.error = error.message;
   }
 }

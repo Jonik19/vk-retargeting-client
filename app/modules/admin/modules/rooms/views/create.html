@@ -2,7 +2,12 @@
 
 <div class="container">
     <div class="col-md-8 col-md-push-2">
-        <form class="form" name="vm.form">
+        <form class="form" ng-submit="vm.create(vm.room, $event)" name="vm.form" novalidate>
+
+            <div class="form-group">
+                <form-error for="vm.error"></form-error>
+            </div>
+
             <div class="form-group">
                 <input name="name"
                        class="form-control"
@@ -13,13 +18,13 @@
                        required
                 >
 
-                <div ng-show="vm.form.name.$dirty" ng-messages="vm.form.name.$error">
+                <div ng-show="vm.form.name.$dirty || vm.form.$submitted" ng-messages="vm.form.name.$error" class="text-danger">
                     <div ng-message="required">Field should be filled</div>
                 </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-md btn-success btn-block" type="submit" ng-click="vm.create(vm.room, $event)">Create</button>
+                <button class="btn btn-md btn-success btn-block" type="submit">Create</button>
             </div>
         </form>
     </div>

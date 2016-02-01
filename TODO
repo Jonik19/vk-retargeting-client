@@ -1,11 +1,6 @@
 TODO: list
 
-# 1. Create separated navigation view and add controller to it to handle
- 'sign-out' action.
-# 2. Change Injector class using $injector
-# 3. Change local every 'check' and 'sign-in'
 # 4. Add states names to config
 # 5. Problem with abstract 'admin.rooms' state
 # 6. Use Resource instead API
-# 7. Change redirect to home
 # 8. Problem with SignIn need to make double click to sign in. Problem related with $invalid property.

@@ -23,9 +23,6 @@ export default class SignUpController extends Controller {
 
   signUp(user, event) {
     if(this.form.$invalid) {
-
-      alert('Показать ошибки на каждом ');
-
       return event.preventDefault();
     }
 
@@ -41,19 +38,16 @@ export default class SignUpController extends Controller {
    */
 
   redirectOnSuccess(user) {
-    alert('Congratulations. You are our new user!');
-
     this.injections.$state.go('admin.rooms.list');
   }
 
   /**
-   * Method which is called on unsuccessful user creation
+   * Method which is called on unsuccessful authentication
    *
-   * @param error
+   * @param response
    */
 
   showErrors(error) {
-    alert(JSON.stringify(error));
-    console.log(error);
+    this.error = error.message;
   }
 }
