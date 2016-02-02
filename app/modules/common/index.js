@@ -1,12 +1,6 @@
 import angular from 'angular';
 
 /**
- * Services
- */
-
-import Api from './services/api';
-
-/**
  * Resources
  */
 
@@ -20,8 +14,6 @@ import ApiResource from './resources/api_resource';
  */
 
 export default angular.module('app.common', [])
-  .service('Api', Api)
-
   .factory('UserResource', UserResource)
   .factory('RoomResource', RoomResource)
   .factory('PurchaseResource', PurchaseResource)

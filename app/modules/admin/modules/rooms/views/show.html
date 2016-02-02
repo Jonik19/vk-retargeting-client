@@ -50,6 +50,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered" >
+                        <!--Header-->
                         <thead>
                         <tr>
                             <th>Purchase</th>
@@ -59,6 +60,7 @@
                         </tr>
                         </thead>
 
+                        <!--Content-->
                         <tbody>
                         <tr ng-repeat="purchase in vm.purchases track by purchase.id">
 
@@ -76,6 +78,22 @@
                             <td ng-bind="purchase.amount"></td>
                         </tr>
                         </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+
+                                <!--User totals-->
+                                <td class="active" ng-repeat="user in vm.users track by user.id">
+                                    <span ng-if="vm.isInCredits(user.id)">
+                                        <b>Итого:</b> <span ng-bind="vm.getCreditByUser(user.id).purchase.credit"></span>
+                                    </span>
+
+                                    <span ng-if="!vm.isInCredits(user.id)">Итого: 0</span>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

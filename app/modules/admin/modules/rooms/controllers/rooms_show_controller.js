@@ -20,9 +20,21 @@ export default class RoomsShowController extends Controller {
     this.injections.$q.all([
       this.loadRoom(roomId),
       this.loadUsers(roomId),
-      this.loadPurchases(roomId)
+      this.loadPurchases(roomId),
+      this.loadCredits(roomId)
     ])
       .then(this.onDataLoad.bind(this));
+  }
+
+  /**
+   * Loads room info from api.
+   *
+   * @param roomId
+   * @returns {*|Function}
+   */
+
+  loadCredits(roomId) {
+    return this.injections.PurchaseResource.getRoomCredits({roomId: roomId}).$promise;
   }
 
   /**
@@ -72,6 +84,18 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
+   * Returns 'true' if user is in the credits list.
+   *
+   * @param {Object} userId  User id
+   * @param {Number} userId  User id
+   * @returns {boolean}
+   */
+
+  isInCredits(userId) {
+    return !!_.find(this.credits, {userId: userId});
+  }
+
+  /**
    * Find user by id
    *
    * @param {Number} id User id
@@ -83,6 +107,17 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
+   * Returns credit for appropriate user
+   *
+   * @param userId User id
+   * @returns {*}
+   */
+
+  getCreditByUser(userId) {
+    return _.find(this.credits, {userId: userId});
+  }
+
+  /**
    * Prepares data for rendering. Is called when all requests are resolved.
    *
    * @param promises Array of requests promises
@@ -90,8 +125,11 @@ export default class RoomsShowController extends Controller {
 
   onDataLoad(promises) {
     this.room = promises[0].response;
-    this.users = promises[1].response.items;
     this.purchases = promises[2].response.items;
+
+    // Compose it in objects
+    this.users = promises[1].response.items;
+    this.credits = promises[3].response.items;
 
     // We can render page
     this.dataLoaded = true;
