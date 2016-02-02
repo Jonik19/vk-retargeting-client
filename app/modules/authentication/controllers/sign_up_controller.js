@@ -47,7 +47,7 @@ export default class SignUpController extends Controller {
    * @param response
    */
 
-  showErrors(error) {
-    this.error = error.message;
+  showErrors(response) {
+    this.error = response.data.error.message;
   }
 }

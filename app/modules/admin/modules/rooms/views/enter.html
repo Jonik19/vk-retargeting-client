@@ -20,6 +20,7 @@
 
                 <div ng-show="vm.form.id.$dirty || vm.form.$submitted" ng-messages="vm.form.id.$error"  class="text-danger">
                     <div ng-message="required">Field should be filled</div>
+                    <div ng-message="number">Field should be a number</div>
                 </div>
             </div>
 

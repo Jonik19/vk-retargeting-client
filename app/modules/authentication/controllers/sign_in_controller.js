@@ -45,10 +45,10 @@ export default class SignInController extends Controller {
   /**
    * Method which is called on unsuccessful authentication
    *
-   * @param error
+   * @param response
    */
 
-  showErrors(error) {
-    this.error = error.message;
+  showErrors(response) {
+    this.error = response.data.error.message;
   }
 }

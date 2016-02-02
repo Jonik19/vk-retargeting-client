@@ -7,7 +7,7 @@ import SessionService from './session_service';
  */
 
 export default class AuthenticationService extends Service {
-  static $inject = ['$q', 'Api', 'SessionService'];
+  static $inject = ['$q', 'ApiResource', 'SessionService'];
 
   constructor() {
     super(arguments);
@@ -25,9 +25,9 @@ export default class AuthenticationService extends Service {
 
     data = data || {};
 
-    return this.injections.Api.post('/sign-in', data)
-      .then(function (response) {
-        return self.injections.SessionService.createSession(response);
+    return this.injections.ApiResource.signIn(data).$promise
+      .then(function (data) {
+        return self.injections.SessionService.createSession(data.response);
       });
   }
 
@@ -42,9 +42,9 @@ export default class AuthenticationService extends Service {
   check() {
     let self = this;
 
-    return this.injections.Api.get('/check')
-      .then(function (response) {
-        return self.injections.SessionService.createSession(response);
+    return this.injections.ApiResource.check().$promise
+      .then(function (data) {
+        return self.injections.SessionService.createSession(data.response);
       });
   }
 
@@ -60,9 +60,9 @@ export default class AuthenticationService extends Service {
 
     data = data || {};
 
-    return this.injections.Api.post('/sign-up', data)
-      .then(function (response) {
-        return self.injections.SessionService.createSession(response);
+    return this.injections.ApiResource.signUp(data).$promise
+      .then(function (data) {
+        return self.injections.SessionService.createSession(data.response);
       });
   }
 
