@@ -5,6 +5,8 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class RoomsListController extends Controller {
+  static $inject = ['RoomResource'];
+
   constructor() {
     super(arguments);
 
@@ -33,5 +35,3 @@ export default class RoomsListController extends Controller {
   }
 
 }
-
-RoomsListController.$inject = ['RoomResource'];

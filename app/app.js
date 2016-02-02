@@ -17,6 +17,7 @@ import routes from './config/routes';
 import interceptors from './config/interceptors';
 import http from './config/http';
 import run from './config/run';
+import html5mode from './config/html5mode';
 
 /**
  * Main config file
@@ -43,6 +44,7 @@ angular.module('app', [resource, uiRouter, home, authentication, common, admin, 
 
   .config(interceptors)
   .config(http)
+  .config(html5mode)
   .config(routes)
 
   .run(run);

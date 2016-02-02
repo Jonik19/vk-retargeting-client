@@ -5,6 +5,8 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class RoomsCreateController extends Controller {
+  static $inject = ['UserResource', 'RoomResource', '$state'];
+
   constructor() {
     super(arguments);
 
@@ -15,9 +17,14 @@ export default class RoomsCreateController extends Controller {
    * Creates room by passed data and redirects after success.
    *
    * @param room
+   * @param event
    */
 
-  create(room) {
+  create(room, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.RoomResource.save(room).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));
@@ -32,14 +39,12 @@ export default class RoomsCreateController extends Controller {
   }
 
   /**
-   * Deete it in future !!!!
+   * Method which is called on unsuccessful authentication
+   *
+   * @param response
    */
 
   showErrors(response) {
-    alert(JSON.stringify(response.data.error));
-    console.log(response.data.error);
-
+    this.error = response.data.error.message;
   }
 }
-
-RoomsCreateController.$inject = ['UserResource', 'RoomResource', '$state'];

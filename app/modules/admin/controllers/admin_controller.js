@@ -5,6 +5,8 @@ import Controller from '../../common/controllers/controller';
  */
 
 export default class AdminController extends Controller {
+  static $inject = ['SessionService', 'AuthenticationService', '$state'];
+
   constructor() {
     super(arguments);
 
@@ -20,5 +22,3 @@ export default class AdminController extends Controller {
     this.injections.$state.go('auth.sign-in');
   }
 }
-
-AdminController.$inject = ['SessionService', 'AuthenticationService', '$state'];

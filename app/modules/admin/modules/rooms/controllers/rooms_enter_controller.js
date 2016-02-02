@@ -5,6 +5,8 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class RoomsEnterController extends Controller {
+  static $inject = ['RoomResource', '$state'];
+
   constructor() {
     super(arguments);
 
@@ -15,9 +17,14 @@ export default class RoomsEnterController extends Controller {
    * Enters in passed room and redirects on success.
    *
    * @param room
+   * @param event
    */
 
-  enter(room) {
+  enter(room, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.RoomResource.enter(room).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));
@@ -31,9 +38,14 @@ export default class RoomsEnterController extends Controller {
     this.injections.$state.go('admin.rooms.list');
   }
 
+
+  /**
+   * Method which is called on unsuccessful authentication
+   *
+   * @param response
+   */
+
   showErrors(response) {
-    alert(JSON.stringify(response.data.error));
+    this.error = response.data.error.message;
   }
 }
-
-RoomsEnterController.$inject = ['RoomResource', '$state'];

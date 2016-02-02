@@ -5,6 +5,8 @@ import Controller from '../../common/controllers/controller';
  */
 
 export default class SignUpController extends Controller {
+  static $inject = ['AuthenticationService', '$state'];
+
   constructor() {
     super(arguments);
 
@@ -21,9 +23,6 @@ export default class SignUpController extends Controller {
 
   signUp(user, event) {
     if(this.form.$invalid) {
-
-      alert('Показать ошибки на каждом ');
-
       return event.preventDefault();
     }
 
@@ -39,21 +38,16 @@ export default class SignUpController extends Controller {
    */
 
   redirectOnSuccess(user) {
-    alert('Congratulations. You are our new user!');
-
     this.injections.$state.go('admin.rooms.list');
   }
 
   /**
-   * Method which is called on unsuccessful user creation
+   * Method which is called on unsuccessful authentication
    *
-   * @param error
+   * @param response
    */
 
-  showErrors(error) {
-    alert(JSON.stringify(error));
-    console.log(error);
+  showErrors(response) {
+    this.error = response.data.error.message;
   }
 }
-
-SignUpController.$inject = ['AuthenticationService', '$state'];

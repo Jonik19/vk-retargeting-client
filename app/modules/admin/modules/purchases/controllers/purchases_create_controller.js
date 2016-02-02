@@ -5,6 +5,8 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class PurchasesCreateController extends Controller {
+  static $inject = ['UserResource', 'RoomResource', 'PurchaseResource', '$q', '$state', '$stateParams'];
+
   constructor() {
     super(arguments);
 
@@ -31,11 +33,17 @@ export default class PurchasesCreateController extends Controller {
    * otherwise shows errors.
    *
    * @param {Object} purchase Purchase object to send to api
+   * @param {Object} event
    */
 
-  create(purchase) {
+  create(purchase, event) {
+    if(this.form.$invalid) {
+      return event.preventDefault();
+    }
+
     this.injections.PurchaseResource.save(purchase).$promise
-      .then(this.backToRoom.bind(this));
+      .then(this.backToRoom.bind(this))
+      .catch(this.showErrors.bind(this));
   }
 
   /**
@@ -44,6 +52,7 @@ export default class PurchasesCreateController extends Controller {
    * @param roomId
    * @returns {*|Function}
    */
+
 
   loadUsers(roomId) {
     return this.injections.UserResource.getByRoom({roomId: roomId}).$promise;
@@ -93,6 +102,14 @@ export default class PurchasesCreateController extends Controller {
 
     user.selected = !user.selected;
   }
-}
 
-PurchasesCreateController.$inject = ['UserResource', 'RoomResource', 'PurchaseResource', '$q', '$state', '$stateParams'];
+  /**
+   * Method which is called on unsuccessful authentication
+   *
+   * @param response
+   */
+
+  showErrors(response) {
+    this.error = response.data.error.message;
+  }
+}

@@ -1,4 +1,6 @@
 export default class Injector {
+  static $inject = [];
+
   /**
    * Constructor
    *
@@ -49,5 +51,3 @@ export default class Injector {
     return injections;
   }
 }
-
-Injector.$inject = [];

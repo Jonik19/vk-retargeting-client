@@ -5,6 +5,8 @@ import Controller from '../../common/controllers/controller';
  */
 
 export default class SignInController extends Controller {
+  static $inject = ['AuthenticationService', '$state'];
+
   constructor() {
     super(arguments);
 
@@ -20,6 +22,7 @@ export default class SignInController extends Controller {
    */
 
   signIn(user, event) {
+
     if(this.form.$invalid) {
       return event.preventDefault();
     }
@@ -42,12 +45,10 @@ export default class SignInController extends Controller {
   /**
    * Method which is called on unsuccessful authentication
    *
-   * @param error
+   * @param response
    */
 
-  showErrors(error) {
-    alert(JSON.stringify(error));
+  showErrors(response) {
+    this.error = response.data.error.message;
   }
 }
-
-SignInController.$inject = ['AuthenticationService', '$state'];

@@ -2,7 +2,11 @@
 
 <div class="container">
     <div class="col-md-8 col-md-push-2">
-        <form class="form" name="vm.form" novalidate>
+        <form class="form" ng-submit="vm.signIn(vm.user, $event)" name="vm.form" novalidate>
+
+            <div class="form-group">
+                <form-error for="vm.error"></form-error>
+            </div>
 
             <div class="form-group">
                 <input name="username"
@@ -10,10 +14,13 @@
                        type="text"
                        placeholder="Username"
                        ng-model="vm.user.username"
-                       pattern="{{config.validation.username.pattern}}"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 400}}"
                        required
                 >
-                <error-message for="vm.form.username"></error-message>
+
+                <div ng-show="vm.form.username.$dirty || vm.form.$submitted" ng-messages="vm.form.username.$error"  class="text-danger">
+                    <div ng-message="required">Field should be filled</div>
+                </div>
             </div>
 
             <div class="form-group">
@@ -22,14 +29,17 @@
                        type="password"
                        placeholder="Password"
                        ng-model="vm.user.password"
-                       minlength="{{ config.validation.password.minlength }}"
+                       ng-model-options="{updateOn: 'default blur', debounce: {default: 400}}"
                        required
                 >
-                <error-message for="vm.form.password"></error-message>
+
+                <div ng-show="vm.form.password.$dirty || vm.form.$submitted" ng-messages="vm.form.password.$error"  class="text-danger">
+                    <div ng-message="required">Field should be filled</div>
+                </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-md btn-primary btn-block" type="submit" ng-click="vm.signIn(vm.user, $event)">Sign in</button>
+                <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
             </div>
 
         </form>

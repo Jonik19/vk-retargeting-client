@@ -5,6 +5,8 @@ import Service from '../../common/services/service';
  */
 
 export default class SessionService extends Service {
+  static $inject = ['$q'];
+
   constructor() {
     super(arguments);
 
@@ -185,5 +187,3 @@ export default class SessionService extends Service {
     return 'user';
   }
 };
-
-SessionService.$inject = ['$q'];

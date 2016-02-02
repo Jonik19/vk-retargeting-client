@@ -1,14 +1,57 @@
-<h3>List of rooms</h3>
+<div ng-if="vm.rooms">
 
-<table class="table">
-    <thead>
-        <th>№</th>
-        <th>Name</th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="room in vm.rooms track by room.id">
-            <td><span ng-bind="room.id"></span></td>
-            <td><a ng-href="{{ $state.href('admin.rooms.show', {id: room.id}) }}" ng-bind="room.name"></a></td>
-        </tr>
-    </tbody>
-</table>
+    <!--User has rooms-->
+
+    <div ng-if="vm.rooms.length > 0">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>List of rooms</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <th>№</th>
+                    <th>Name</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="room in vm.rooms track by room.id">
+                        <td><span ng-bind="room.id"></span></td>
+                        <td><a ng-href="{{ $state.href('admin.rooms.show', {id: room.id}) }}" ng-bind="room.name"></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--User doesn't have any rooms-->
+
+    <div ng-if="vm.rooms.length === 0">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3>You don't have any rooms now.</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a ui-sref="admin.rooms.create" class="btn btn-success btn-block">
+                            <i class="glyphicon glyphicon-plus"></i> Create room
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a ui-sref="admin.rooms.enter" class="btn btn-default btn-block">
+                            Enter to room
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
