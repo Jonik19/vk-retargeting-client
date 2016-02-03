@@ -21,9 +21,21 @@ export default class RoomsShowController extends Controller {
       this.loadRoom(roomId),
       this.loadUsers(roomId),
       this.loadPurchases(roomId),
-      this.loadCredits(roomId)
+      this.loadCredits(roomId),
+      this.loadDebits(roomId)
     ])
       .then(this.onDataLoad.bind(this));
+  }
+
+  /**
+   * Loads room info from api.
+   *
+   * @param roomId
+   * @returns {*|Function}
+   */
+
+  loadDebits(roomId) {
+    return this.injections.PurchaseResource.getRoomDebits({roomId: roomId}).$promise;
   }
 
   /**
@@ -107,14 +119,50 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
-   * Returns credit for appropriate user
+   * Returns deviation for whole room
+   *
+   * @returns {*}
+   */
+
+  getRoomDeviation() {
+    let roomCredit = 0;
+    let roomDebit = 0;
+
+    for(let key1 in this.credits) {
+      roomCredit += this.credits[key1];
+    }
+
+    for(let key2 in this.debits) {
+      roomDebit += this.debits[key2];
+    }
+
+    return (roomDebit - roomCredit).toFixed(2);
+  }
+
+  /**
+   * Returns total for whole room
+   *
+   * @returns {*}
+   */
+
+  getRoomTotal() {
+    return this.purchases.reduce(function (prev, item) {
+      return prev+item.amount;
+    }, 0);
+  }
+
+  /**
+   * Returns total for appropriate user
    *
    * @param userId User id
    * @returns {*}
    */
 
-  getCreditByUser(userId) {
-    return _.find(this.credits, {userId: userId});
+  getTotalForUser(userId) {
+    let credit = this.credits[userId] || 0;
+    let debit = this.debits[userId] || 0;
+
+    return (debit - credit).toFixed(2);
   }
 
   /**
@@ -129,9 +177,44 @@ export default class RoomsShowController extends Controller {
 
     // Compose it in objects
     this.users = promises[1].response.items;
-    this.credits = promises[3].response.items;
+    this.credits = this.composeCredits(promises[3].response.items);
+    this.debits = this.composeDebits(promises[4].response.items);
 
     // We can render page
     this.dataLoaded = true;
+  }
+
+  /**
+   * Composes array in object by some property
+   */
+
+  composeInObject(array, callback) {
+    let result = {};
+
+    array.map(function (item) {
+      callback(result, item);
+    });
+
+    return result;
+  }
+
+  /**
+   * Composes debits
+   */
+
+  composeDebits(items) {
+    return this.composeInObject(items, function (debits, item) {
+      debits[item['ownerId']] = item['debit'];
+    });
+  }
+
+  /**
+   * Composes credits
+   */
+
+  composeCredits(items) {
+    return this.composeInObject(items, function (credits, item) {
+      credits[item['userId']] = item['purchase']['credit'];
+    });
   }
 }
