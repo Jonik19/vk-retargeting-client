@@ -82,10 +82,10 @@ export default function config($urlRouterProvider, $stateProvider) {
       controllerAs: 'vm'
     })
 
-    .state('admin.rooms.enter', {
-      url: '/enter',
-      template: require('../modules/admin/modules/rooms/views/enter.html'),
-      controller: 'RoomsEnterController',
+    .state('admin.rooms.approve', {
+      url: '/approve/:token',
+      template: require('../modules/admin/modules/rooms/views/approve.html'),
+      controller: 'RoomsApproveController',
       controllerAs: 'vm'
     })
     .state('admin.rooms.show', {
