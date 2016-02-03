@@ -4,28 +4,24 @@ import Controller from '../../../../common/controllers/controller';
  * RoomsEnterController controller.
  */
 
-export default class RoomsEnterController extends Controller {
-  static $inject = ['RoomResource', '$state'];
+export default class RoomsApproveController extends Controller {
+  static $inject = ['RoomResource', '$state', '$stateParams'];
 
   constructor() {
     super(arguments);
 
-    this.room = {};
+    this.approve(this.injections.$stateParams.token)
+      .finally(this.markAsDone.bind(this));
   }
 
   /**
-   * Enters in passed room and redirects on success.
+   * Approves user in some room by passed token.
    *
-   * @param room
-   * @param event
+   * @param token
    */
 
-  enter(room, event) {
-    if(this.form.$invalid) {
-      return event.preventDefault();
-    }
-
-    this.injections.RoomResource.enter(room).$promise
+  approve(token) {
+    return this.injections.RoomResource.approve({token: token}).$promise
       .then(this.redirectAfterCreation.bind(this))
       .catch(this.showErrors.bind(this));
   }
@@ -36,6 +32,14 @@ export default class RoomsEnterController extends Controller {
 
   redirectAfterCreation() {
     this.injections.$state.go('admin.rooms.list');
+  }
+
+  /**
+   * Sets 'done' field on the scope to 'true'
+   */
+
+  markAsDone() {
+    this.done = true;
   }
 
 
