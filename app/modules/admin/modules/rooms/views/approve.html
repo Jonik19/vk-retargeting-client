@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="col-md-8 col-md-push-2">
+        <div ng-if="!vm.done">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Approving to the room...</h3>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="vm.done">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-danger" ng-bind="vm.error"></h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a ui-sref="admin.rooms.list" class="btn btn-default">Go to rooms list</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
