@@ -8,6 +8,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import resource from 'angular-resource';
 import lodash from 'lodash';
+import UIBootstrap from 'angular-ui-bootstrap';
 
 /**
  * Config middlewares
@@ -39,7 +40,7 @@ import errors from './modules/errors';
  * Definition
  */
 
-angular.module('app', [resource, uiRouter, home, authentication, common, admin, errors])
+angular.module('app', [resource, uiRouter, home, authentication, common, admin, errors, UIBootstrap])
   .constant('config', config)
 
   .config(interceptors)
