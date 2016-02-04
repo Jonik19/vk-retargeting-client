@@ -5,18 +5,17 @@ import Controller from '../../../../common/controllers/controller';
  */
 
 export default class RoomsShowController extends Controller {
-  static $inject = ['RoomResource', 'UserResource', 'PurchaseResource', '$stateParams', '$q'];
+  static $inject = ['RoomResource', 'UserResource', 'PurchaseResource', '$stateParams', '$q', '$state', 'config'];
 
   constructor() {
     super(arguments);
 
-    // It's flag for page rendering.
-
+    // It's flag for table rendering.
     this.dataLoaded = true;
 
     let roomId = this.roomId = this.injections.$stateParams.id;
 
-    // Wait for every request is resolved to render page
+    // Wait for every request is resolved to render table
     this.injections.$q.all([
       this.loadRoom(roomId),
       this.loadUsers(roomId),
@@ -83,6 +82,16 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
+   * Assigns link from api to the scope
+   *
+   * @param data
+   */
+
+  onLinkLoad(data) {
+    this.inviteLink = this.injections.config.site.baseUrl + this.injections.$state.href('admin.rooms.approve', {token: data.response});
+  }
+
+  /**
    * Returns 'true' if user is in the purchase list.
    *
    * @param {Object} purchase  Purchase object
@@ -96,26 +105,33 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
-   * Returns 'true' if user is in the credits list.
-   *
-   * @param {Object} userId  User id
-   * @param {Number} userId  User id
-   * @returns {boolean}
+   * Refreshes invite link. Loads it from api and assigns to the scope.
    */
 
-  isInCredits(userId) {
-    return !!_.find(this.credits, {userId: userId});
+  refreshInviteLink() {
+    this.loadInviteLink(this.roomId)
+      .then(this.onLinkLoad.bind(this));
   }
 
   /**
-   * Find user by id
-   *
-   * @param {Number} id User id
-   * @returns {Object} User object
+   * Sets invite link to scope if it's doesn't exist.
    */
 
-  getUserById(id) {
-    return _.find(this.users, {id: id});
+  setInviteLink() {
+    if(undefined === this.inviteLink) {
+      this.refreshInviteLink();
+    }
+  }
+
+  /**
+   * Load invite link from api.
+   *
+   * @param roomId Id of the room to get invite link
+   * @returns {*|Function}
+   */
+
+  loadInviteLink(roomId) {
+    return this.injections.RoomResource.getInviteLink({ roomId: roomId }).$promise;
   }
 
   /**
@@ -180,7 +196,7 @@ export default class RoomsShowController extends Controller {
     this.credits = this.composeCredits(promises[3].response.items);
     this.debits = this.composeDebits(promises[4].response.items);
 
-    // We can render page
+    // We can render table
     this.dataLoaded = true;
   }
 

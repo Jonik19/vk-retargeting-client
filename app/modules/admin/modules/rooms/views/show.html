@@ -19,6 +19,14 @@
                 <a ng-href="{{ $state.href('admin.rooms.purchases.create', {roomId: vm.roomId}) }}" class="btn btn-md btn-success">
                     <i class="glyphicon glyphicon-plus"></i> Add purchase
                 </a>
+                <button uib-popover-template="'templates.rooms.show.invite'"
+                        popover-title="Invite link"
+                        type="button"
+                        class="btn btn-primary"
+                        ng-click="vm.setInviteLink()"
+                >
+                    <i class="glyphicon glyphicon-link"></i> Invite link
+                </button>
             </div>
         </div>
     </div>
@@ -82,6 +90,7 @@
                         </tr>
                         </tbody>
 
+                        <!--Totals-->
                         <tfoot>
                             <tr>
                                 <td></td>
@@ -105,3 +114,21 @@
 
     </div>
 </div>
+
+<!--Template for invite link-->
+
+<script type="text/ng-template" id="templates.rooms.show.invite">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" ng-value="vm.inviteLink" class="form-control" readonly onclick="this.select();">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-block" ng-click="vm.refreshInviteLink()">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</script>
