@@ -9,17 +9,6 @@ export default function config($urlRouterProvider, $stateProvider) {
   $stateProvider
 
   /**
-   * Home routes
-   */
-
-    .state('home', {
-      url: '/',
-      template: require('../modules/home/views/index.html'),
-      controller: 'HomeController',
-      controllerAs: 'vm'
-    })
-
-  /**
    * Authentication
    */
 
