@@ -22,6 +22,8 @@ export default class SignUpController extends Controller {
    */
 
   signUp(user, event) {
+    console.log(this.form.username.$error);
+
     if(this.form.$invalid) {
       return event.preventDefault();
     }
@@ -48,6 +50,17 @@ export default class SignUpController extends Controller {
    */
 
   showErrors(response) {
+    let self = this;
+
     this.error = response.data.error.message;
+    this.errors = response.data.error.errors;
+
+    if(response.data.error.errors) {
+      this.errors  = response.data.error.errors.reduce(function (errors, error) {
+        errors[error.path] = error.message;
+
+        return errors;
+      }, {});
+    }
   }
 }
