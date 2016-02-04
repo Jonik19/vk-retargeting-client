@@ -1,4 +1,5 @@
 import bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import style from './style/style.css';
 
 /**
  * Assets
