@@ -1,4 +1,5 @@
 import bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import style from './style/style.css';
 
 /**
  * Assets
@@ -30,7 +31,6 @@ import config from './config/index';
  * Custom modules
  */
 
-import home from './modules/home';
 import authentication from './modules/authentication';
 import common from './modules/common';
 import admin from './modules/admin';
@@ -40,7 +40,7 @@ import errors from './modules/errors';
  * Definition
  */
 
-angular.module('app', [resource, uiRouter, home, authentication, common, admin, errors, UIBootstrap])
+angular.module('app', [resource, uiRouter, authentication, common, admin, errors, UIBootstrap])
   .constant('config', config)
 
   .config(interceptors)
