@@ -17,7 +17,7 @@ export default class Injector {
    * with appropriate names.
    * Example:
    *
-   * class ChildController extends Controller {
+   * class ChildController extends Injector {
    *   constructor() {
    *     super(arguments);
    *   }

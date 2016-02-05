@@ -1,7 +1,7 @@
 import Controller from '../../common/controllers/controller';
 
 /**
- * SignInController controller.
+ * AdminController controller.
  */
 
 export default class AdminController extends Controller {
@@ -13,10 +13,18 @@ export default class AdminController extends Controller {
     this.user =  this.injections.SessionService.getUser();
   }
 
+  /**
+   * Destroys user session and redirects from admin.
+   */
+
   signOut() {
     this.injections.AuthenticationService.signOut()
       .then(this.redirectOnSignOut.bind(this));
   }
+
+  /**
+   * Redirects user to 'sign-in' state.
+   */
 
   redirectOnSignOut() {
     this.injections.$state.go('auth.sign-in');

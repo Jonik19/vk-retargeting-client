@@ -1,7 +1,7 @@
 import Controller from '../../../../common/controllers/controller';
 
 /**
- * RoomsEnterController controller.
+ * RoomsApproveController controller.
  */
 
 export default class RoomsApproveController extends Controller {
@@ -35,7 +35,8 @@ export default class RoomsApproveController extends Controller {
   }
 
   /**
-   * Sets 'done' field on the scope to 'true'
+   * Sets 'done' field on the scope to 'true'.
+   * This flag is needed to show progress of approving.
    */
 
   markAsDone() {
