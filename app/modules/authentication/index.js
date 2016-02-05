@@ -14,7 +14,6 @@ import SignUpController from './controllers/sign_up_controller';
 import NotAuthorizedInterceptor from './services/not_authorized_interceptor';
 import TokenInterceptor from './services/token_interceptor';
 
-
 /**
  * Services
  */

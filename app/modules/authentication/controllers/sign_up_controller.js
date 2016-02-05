@@ -22,8 +22,6 @@ export default class SignUpController extends Controller {
    */
 
   signUp(user, event) {
-    console.log(this.form.username.$error);
-
     if(this.form.$invalid) {
       return event.preventDefault();
     }

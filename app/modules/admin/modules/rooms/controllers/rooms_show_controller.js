@@ -100,7 +100,6 @@ export default class RoomsShowController extends Controller {
    */
 
   isInPurchase(purchase, userId) {
-    // this function works to many times
     return !!_.find(purchase.users, {userId: userId});
   }
 
@@ -124,7 +123,7 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
-   * Load invite link from api.
+   * Loads invite link from api.
    *
    * @param roomId Id of the room to get invite link
    * @returns {*|Function}
@@ -135,7 +134,15 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
-   * Returns deviation for whole room
+   * Returns deviation for whole room. We need to calculate deviation
+   * because there are cases when purchase's amount divided on some count of people
+   * is infinite. For example: Amount - 100, Users count - 3
+   *
+   * 100/3 = 33.3333...3 (infinite)
+   *
+   * Because of such divides happens deviation- amount that room(every user) needs to pay in common bank.
+   * It's amount for whole room NOT for each user. To get amount for one user you should divide
+   * that amount on users count.
    *
    * @returns {*}
    */
@@ -156,7 +163,7 @@ export default class RoomsShowController extends Controller {
   }
 
   /**
-   * Returns total for whole room
+   * Returns total amount for whole room
    *
    * @returns {*}
    */
