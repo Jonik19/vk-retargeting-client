@@ -16,13 +16,13 @@ export default class RoomsShowController extends Controller {
     let roomId = this.roomId = this.injections.$stateParams.id;
 
     // Wait for every request is resolved to render table
-    this.injections.$q.all([
-      this.loadRoom(roomId),
-      this.loadUsers(roomId),
-      this.loadPurchases(roomId),
-      this.loadCredits(roomId),
-      this.loadDebits(roomId)
-    ])
+    this.injections.$q.all({
+      room: this.loadRoom(roomId),
+      users: this.loadUsers(roomId),
+      purchases: this.loadPurchases(roomId),
+      credits: this.loadCredits(roomId),
+      debits: this.loadDebits(roomId)
+  })
       .then(this.onDataLoad.bind(this));
   }
 
@@ -195,13 +195,13 @@ export default class RoomsShowController extends Controller {
    */
 
   onDataLoad(promises) {
-    this.room = promises[0].response;
-    this.purchases = promises[2].response.items;
+    this.room = promises.room.response;
+    this.purchases = promises.purchases.response.items;
 
     // Compose it in objects
-    this.users = promises[1].response.items;
-    this.credits = this.composeCredits(promises[3].response.items);
-    this.debits = this.composeDebits(promises[4].response.items);
+    this.users = promises.users.response.items;
+    this.credits = this.composeCredits(promises.credits.response.items);
+    this.debits = this.composeDebits(promises.debits.response.items);
 
     // We can render table
     this.dataLoaded = true;
