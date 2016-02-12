@@ -22,9 +22,7 @@ export default class PurchasesCreateController extends Controller {
     this.dataLoaded = false;
 
     // load all data from api
-    this.injections.$q.all({
-      users: this.loadUsers(roomId)
-  })
+    this.loadUsers(roomId)
       .then(this.onDataLoad.bind(this));
   }
 
@@ -69,11 +67,11 @@ export default class PurchasesCreateController extends Controller {
   /**
    * Called when all data from api is loaded.
    *
-   * @param promises
+   * @param promise
    */
 
-  onDataLoad(promises) {
-    this.users = promises.users.response.items;
+  onDataLoad(promise) {
+    this.users = promise.response.items;
 
     this.dataLoaded = true;
   }
