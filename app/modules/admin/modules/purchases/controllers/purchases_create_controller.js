@@ -22,9 +22,7 @@ export default class PurchasesCreateController extends Controller {
     this.dataLoaded = false;
 
     // load all data from api
-    this.injections.$q.all([
-      this.loadUsers(roomId)
-    ])
+    this.loadUsers(roomId)
       .then(this.onDataLoad.bind(this));
   }
 
@@ -67,21 +65,13 @@ export default class PurchasesCreateController extends Controller {
   }
 
   /**
-   * Returns url to the current room page.
-   */
-
-  getCurrentRoomUrl() {
-    return this.injections.$state.href('admin.rooms.show', {id: this.roomId});
-  }
-
-  /**
    * Called when all data from api is loaded.
    *
-   * @param promises
+   * @param promise
    */
 
-  onDataLoad(promises) {
-    this.users = promises[0].response.items;
+  onDataLoad(promise) {
+    this.users = promise.response.items;
 
     this.dataLoaded = true;
   }
