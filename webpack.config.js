@@ -55,6 +55,11 @@ config.plugins = [
   new ExtractTextPlugin('bundle.css')
 ];
 
+config.resolve = {
+  root: path.resolve('./app'),
+  extensions: ['', '.js']
+};
+
 // config.watch = 'development' === NODE_ENV;
 // config.cache = false;
 

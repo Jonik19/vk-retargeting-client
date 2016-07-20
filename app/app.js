@@ -31,16 +31,14 @@ import config from './config/index';
  * Custom modules
  */
 
-import authentication from './modules/authentication';
 import common from './modules/common';
-import admin from './modules/admin';
-import errors from './modules/errors';
+import search from './modules/search';
 
 /**
  * Definition
  */
 
-angular.module('app', [resource, uiRouter, authentication, common, admin, errors, UIBootstrap])
+angular.module('app', [resource, uiRouter, common, search, UIBootstrap])
   .constant('config', config)
 
   .config(interceptors)
