@@ -3,17 +3,19 @@
   <div class="row">
     <div class="col-md-12 text-right">
       <div class="form-group">
-        <button class="btn btn-primary" ng-click="ctrl.addForm()">Добавить форму</button>
+        <button class="btn btn-success" ng-click="ctrl.addForm()">Добавить форму</button>
       </div>
     </div>
   </div>
 
-  <search-form data="form" name="{{form.name}}" on-delete="ctrl.deleteForm($index)" ng-repeat="form in ctrl.forms"></search-form>
+  <h3 ng-if="!ctrl.areThereForms()" >Добавьте как минимум одну форму</h3>
+
+  <search-form data="form" name="{{form.name}}" on-delete="ctrl.deleteForm($index)" ng-repeat="form in ctrl.forms track by $index"></search-form>
 
   <div class="row">
     <div class="col-md-12 text-right">
       <div class="form-group">
-        <button class="btn btn-success" ng-click="ctrl.getResults()">Получить результаты</button>
+        <button class="btn btn-primary" ng-click="ctrl.getResults()">Получить результаты</button>
       </div>
     </div>
   </div>
