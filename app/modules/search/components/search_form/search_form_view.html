@@ -1,0 +1,55 @@
+<form class="form">
+  <!-- Текстовые запросы -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <h4 ng-bind="this.name"></h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- Текстовые запросы -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="ctrl.data.query" placeholder="Текстовый запрос">
+      </div>
+    </div>
+  </div>
+
+  <!-- Долгота и широта -->
+
+  <div class="row">
+    <div class="col-md-6 text-right">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="ctrl.data.longitude" placeholder="Долгота">
+      </div>
+    </div>
+
+    <div class="col-md-6 text-right">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="ctrl.data.latitude" placeholder="Широта">
+      </div>
+    </div>
+  </div>
+
+  <!-- Количество постов -->
+
+  <div class="row">
+    <div class="col-md-6 text-right">
+      <div class="form-group">
+        <input type="number" class="form-control" ng-model="ctrl.data.count" placeholder="Количество постов">
+      </div>
+    </div>
+
+    <div class="col-md-6 text-right">
+      <div class="form-group">
+        <button class="btn btn-danger" ng-click="ctrl.onDelete()">Удалить</button>
+      </div>
+    </div>
+  </div>
+
+
+</form>

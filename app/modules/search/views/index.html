@@ -1,29 +1,21 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-md-12">
-      <form class="form">
-
-        <div class="row">
-          <div class="col-md-10">
-
-            <div class="form-group">
-              <label for="query">Текстовый запрос</label>
-              <input type="text" class="form-control" id="query" placeholder="Текстовый запрос">
-            </div>
-
-            <div class="form-group">
-              <label for="query">Текстовый запрос</label>
-              <input type="text" class="form-control" id="query" placeholder="Текстовый запрос">
-            </div>
-
-          </div>
-
-          <div class="col-md-2">
-            <button class="btn btn-success">Добавить поле</button>
-          </div>
-        </div>
-
-      </form>
+    <div class="col-md-12 text-right">
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="ctrl.addForm()">Добавить форму</button>
+      </div>
     </div>
   </div>
+
+  <search-form data="form" name="{{form.name}}" on-delete="ctrl.deleteForm($index)" ng-repeat="form in ctrl.forms"></search-form>
+
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <div class="form-group">
+        <button class="btn btn-success" ng-click="ctrl.getResults()">Получить результаты</button>
+      </div>
+    </div>
+  </div>
+
 </div>

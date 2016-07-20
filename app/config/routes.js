@@ -16,7 +16,7 @@ export default function config($urlRouterProvider, $stateProvider) {
       url: '/',
       template: require('modules/search/views/index.html'),
       controller: 'SearchController',
-      controllerAs: 'vm',
+      controllerAs: 'ctrl',
     });
 }
 
